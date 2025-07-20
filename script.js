@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const highlight={
     id:'highlight',
-    afterEvent(chart){
+    afterEvent(chart,args){
+      const e=args.event;
+      if(e.type!=='mousemove' && e.type!=='mouseout') return;
       const act = chart.getActiveElements();
       chart.data.datasets.forEach(ds=>{
         if(!ds._bg) ds._bg = ds.backgroundColor.slice();
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const {datasetIndex:index, index:i} = act[0];
         chart.data.datasets.forEach((ds,di)=>{
           ds.backgroundColor = ds.backgroundColor.map((c,ci)=>
-            di===index && ci===i ? ds._bg[ci] : 'lightgray');
+            di===index && ci===i ? ds._bg[ci] : '#ccc');
         });
       }
       chart.update('none');
@@ -64,21 +66,36 @@ document.addEventListener('DOMContentLoaded', ()=>{
       labels:['generování textů a nápadů','komunikace s občany (web, chatboty, app)','generování obrázků','práce s daty a tabulkami','automatizace agend a opakujících se úkonů','ostatní'],
       datasets:[{data:[55,19,13,5,3,5],backgroundColor:palette(6),hoverOffset:5}]
     },
-    options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:60,ticks:{callback:v=>v+'%'}},y:{ticks:{font:{size:12}}}}},
+    options:{
+      indexAxis:'y',
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{max:60,ticks:{callback:v=>v+'%'},grid:{borderDash:[]}},
+        y:{ticks:{font:{size:12}},grid:{borderDash:[]}}
+      }
+    }},
     plugins:[highlight]
   }));
 
   const ctx4=document.getElementById('pie-attitude').getContext('2d');
   charts.push(new Chart(ctx4,{
-    type:'doughnut',
+    type:'bar',
     data:{
-      labels:['pozitivní','neutrální','negativní'],
+      labels:['Informace o užívání AI na obcích'],
       datasets:[
-        {data:[49,45,6],backgroundColor:palette(3),hoverOffset:5,radius:'100%'},
-        {data:[9,40,4,2],backgroundColor:palette(4),hoverOffset:5,radius:'70%'}
+        {label:'pozitivní',data:[49],backgroundColor:palette(3)[0]},
+        {label:'neutrální',data:[45],backgroundColor:palette(3)[1]},
+        {label:'negativní',data:[6],backgroundColor:palette(3)[2]}
       ]
     },
-    options:{plugins:{legend:{position:'bottom'}}},
+    options:{
+      indexAxis:'y',
+      plugins:{legend:{position:'bottom'}},
+      scales:{
+        x:{stacked:true,max:100,ticks:{callback:v=>v+'%'},grid:{borderDash:[]}},
+        y:{stacked:true,grid:{borderDash:[]}}
+      }
+    },
     plugins:[highlight]
   }));
 
@@ -89,7 +106,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
       labels:['nízké povědomí o AI','právní/etická nejasnost','chybějící koncepce a vize','nedostatečně školený personál','nedostatek finančních prostředků','nevyhovující technická infrastruktura','odmítání AI ze strany pracovníků'],
       datasets:[{data:[33,15,15,15,13,5,4],backgroundColor:palette(7),hoverOffset:5}]
     },
-    options:{plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:12}}},x:{max:35,ticks:{callback:v=>v+'%'}}}},
+    options:{
+      plugins:{legend:{display:false}},
+      scales:{
+        y:{ticks:{font:{size:12}},grid:{borderDash:[]}},
+        x:{max:35,ticks:{callback:v=>v+'%'},grid:{borderDash:[]}}
+      }
+    }},
     plugins:[highlight]
   }));
 
