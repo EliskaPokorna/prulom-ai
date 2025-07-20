@@ -1,6 +1,7 @@
 :root {
   --c-bg: #ffffff;
   --c-text: #1e2034;
+  --c-text2: 30, 32, 52;
   --c-main: #414a9a;
   --c-main2: 65, 74, 154;
   --c-acc: #d74090;
@@ -360,7 +361,7 @@ ul {
   }
 
   .chart-bg {
-    background: var(--c-acc);
+    background: linear-gradient(90deg, rgba(215, 64, 144, 1) 30%, rgba(30, 32, 52, 1) 100%);
     height: 400px;
     display: flex;
     align-items: center;
@@ -473,6 +474,20 @@ ul {
       flex: 1 1 40%;
     }
 
+    &::before {
+      @media(min-width: 1200px) {
+        content: url(images/arrow-left.svg);
+        position: relative;
+        top: 250px;
+        right: 30px;
+      }
+
+      @media(min-width: 1400px) {
+        top: 280px;
+        right: 50px;
+      }
+
+    }
 
   }
 }
@@ -507,6 +522,10 @@ ul {
 /* barriers */
 
 #barriers {
+  h1 {
+    text-align: center;
+  }
+
   .chart-container {
     height: 200px;
     width: 100%;
@@ -521,8 +540,329 @@ ul {
 
 
 
+/* Karty */
+
+#about-card {
+  background: linear-gradient(90deg, rgba(30, 32, 52, 1) 0%, rgba(65, 74, 154, 1) 100%);
 
 
+
+  h1 {
+    text-align: center;
+    color: var(--c-bg);
+  }
+}
+
+
+#partners {
+  h1 {
+    text-align: center;
+  }
+}
+
+.card-strip {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px 20px;
+  margin: 0 auto;
+  max-width: 1700px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  width: auto;
+  height: auto;
+  flex: 1 1 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  @media(min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media(min-width: 1400px) {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    flex-wrap: nowrap;
+  }
+}
+
+.card2 {
+  img {
+    margin-bottom: 20px;
+
+    @media(min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
+
+
+  .card-link {
+    @media(min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    @media(min-width: 1200px) {
+      margin-top: auto;
+      height: 200px;
+    }
+
+
+  }
+
+  .card-text {
+    height: auto;
+
+    @media(min-width: 1200px) {
+      height: 150px;
+
+    }
+  }
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  color: var(--c-text);
+
+  @media(min-width: 768px) {
+    margin-bottom: auto;
+  }
+}
+
+.card-text {
+  @media(min-width: 1400px) {
+    height: 250px;
+  }
+
+  @media(min-width: 1600px) {
+    height: 200px;
+  }
+}
+
+.card-content h2 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: var(--c-main);
+
+  @media(min-width: 768px) {
+    font-size: 32px;
+
+  }
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.link-linkedin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: url(images/linkedin.svg);
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.link-instagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: url(images/instagram.svg);
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.link-email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: url(images/email.svg);
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.link-web {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+
+
+  &::before {
+    content: url(images/link.svg);
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.card-content a {
+  color: var(--c-main);
+  margin-bottom: 5px;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.card-content a.instagram {
+  color: #C13584;
+}
+
+.card img {
+  width: 100%;
+
+  @media(min-width: 768px) {
+    width: 350px;
+    object-fit: contain;
+  }
+
+  @media(min-width: 1200px) {
+    width: 300px;
+  }
+}
+
+
+/* Karta - já */
+
+#web {
+  background: linear-gradient(90deg, rgba(30, 32, 52, 1) 20%, rgba(104, 45, 89, 1) 72%, rgba(215, 64, 144, 1) 100%);
+  padding-bottom: 0;
+
+  h1 {
+    text-align: center;
+    color: var(--c-bg);
+  }
+}
+
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media(min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .about__left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    @media(min-width: 768px) {
+      align-items: flex-start;
+    }
+
+    h2,
+    a {
+      color: var(--c-bg);
+
+    }
+  }
+
+
+
+
+  .about__middle {
+    margin-top: 40px;
+
+    ul {
+
+      li {
+        color: var(--c-bg);
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .about__right {
+    position: relative;
+    top: 4px;
+
+    img {
+      width: 250px;
+
+      @media(min-width: 768px) {}
+    }
+  }
+
+
+  .link-linkedin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+
+    &::before {
+      content: url(images/linkedin2.svg);
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  .link-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: url(images/email2.svg);
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+}
+
+
+
+
+/* Patička */
+
+.footer {
+  text-align: center;
+  padding: 20px 15px;
+  background: var(--c-text);
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+
+
+
+
+/*################################################*/
 
 
 

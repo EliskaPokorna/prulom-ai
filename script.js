@@ -311,8 +311,6 @@ charts.push(new Chart(ctx5, {
 }));
 
 
-
-
   // Správa zobrazení titulku od 768px
   function updateChartTitle() {
     detailedAttitudeChart.options.plugins.title.display = window.innerWidth >= 768;
@@ -343,4 +341,11 @@ charts.push(new Chart(ctx5, {
 
 
 
-////////////////////
+//////////////////// Karty
+
+// script.js
+// Data pro dvě karty
+
+
+
+
