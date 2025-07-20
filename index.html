@@ -13,7 +13,7 @@
 <body>
 <nav>
   <div class="container">
-    <div class="brand">PRŮLOM AI</div>
+    <div class="brand">PRŮLOM<span>AI</span><br><span class="brand__subtitle">využití AI v obcích ČR</span></div>
     <div class="menu">
       <a href="#main-results">hlavní výsledky</a>
       <a href="#attitude">uvažování o AI</a>
@@ -24,47 +24,78 @@
   </div>
 </nav>
 <main class="container">
+
+
 <section id="hero" class="hero">
-  <h1>Obecní úřady chtějí AI, ale brzdí je:</h1>
-  <ul>
-    <li>legislativní nejistota</li>
-    <li>strach ze zcizení dat</li>
-    <li>nedostatek odborníků</li>
-  </ul>
-</section>
-<section id="main-results">
-  <h2>97&nbsp;%&nbsp;obcí do&nbsp;2500&nbsp;obyvatel nemá žádná zavedená pravidla k&nbsp;využívání&nbsp;AI.</h2>
-  <div class="chart-container"><canvas id="pie-rules"></canvas></div>
-</section>
-<section id="use">
-  <p>51&nbsp;%&nbsp;obcí do&nbsp;2&nbsp;500&nbsp;obyvatel používá AI nástroje – nejčastěji ke generování textů a&nbsp;nápadů, obrázků a&nbsp;ke komunikaci s&nbsp;občany.</p>
-  <h2>Použití AI nástrojů na úřadě</h2>
-  <div class="flex">
-    <div class="half chart-container"><canvas id="bar-areas"></canvas><div class="small">↑ Hlavní oblasti používání AI</div></div>
-    <div class="half chart-container"><canvas id="pie-use"></canvas></div>
+  <div class="hero__container">
+    <div class="hero-left">
+      <h1>Obecní úřady chtějí AI, ale brzdí je:</h1>
+      <h2>Výsledky prvního celostátní průzkumu o použití AI na obcích v ČR,<br>kterého se zúčastnilo téměř 200 obcí do 2 500 obyvatel.<br></h2>
+    </div>
+    <ul>
+      <li class="hero-1">legislativní nejistota</li>
+      <li class="hero-2">strach ze zcizení dat</li>
+      <li class="hero-3">nedostatek odborníků</li>
+    </ul>
   </div>
 </section>
-<section id="attitude">
-  <h2>Informace o užívání AI na obcích</h2>
-  <p>Vnímání umělé inteligence na obcích je spíše pozitivní. Pouze&nbsp;6&nbsp;%&nbsp;obcí nevnímá příchod&nbsp;AI přínosným.</p>
-  <div class="chart-container"><canvas id="pie-attitude"></canvas></div>
+
+<section id="main-results">
+  <h1>Mají obce pravidla pro použití umělé inteligence na úřadech?</h1>
+  <div class="main-results__container">
+    <div class="chart-container"><canvas id="pie-rules"></canvas></div>
+    <div class="chart-right">
+      <div class="chart-bg">
+        <h2><span>97&nbsp;%&nbsp;</span><br>obcí do&nbsp;2500&nbsp;obyvatel nemá žádná zavedená pravidla k&nbsp;využívání&nbsp;AI.</h2>
+      </div>
+      <div class="chart-bg__2">
+        <h2>Pouze 3 % obcí mají obecné zásady bez detailní směrnice pro AI.</h2>
+      </div>
+    </div>
+  </div>
 </section>
+
+<section id="use">
+  <h1>51&nbsp;%&nbsp;obcí do&nbsp;2&nbsp;500&nbsp;obyvatel používá AI nástroje – nejčastěji ke generování textů a&nbsp;nápadů, obrázků a&nbsp;ke komunikaci s&nbsp;občany.</h1>
+  <div class="use__container">
+    <div class="use__left">
+      <h2>Použití AI nástrojů na úřadě</h2>
+      <div class="half chart-container"><canvas id="bar-areas"></canvas><div class="small">↑ Hlavní oblasti používání AI</div></div>
+    </div>
+    <div class="use__right">
+      <div class="half chart-container"><canvas id="pie-use"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<section id="attitude" class="chart-center">
+  <h1>Informace o postoji k AI na obcích</h1>
+  <p>Vnímání umělé inteligence na obcích je spíše pozitivní. Pouze&nbsp;6&nbsp;%&nbsp;obcí nevnímá příchod&nbsp;AI přínosným.</p>
+  <div class="chart-container">
+    <canvas id="detailed-attitude"></canvas>
+  </div>
+</section>
+
 <section id="barriers">
   <h2>Překážky zavádění AI na obcích</h2>
   <div class="chart-container"><canvas id="bar-barriers"></canvas></div>
 </section>
+
 <section id="future">
-  <h2>Budoucnost</h2>
+  <h2>Obavy lidí</h2>
   <p>Budoucnost AI na obcích přinese nové příležitosti a&nbsp;výzvy.</p>
 </section>
+
 <section id="about">
-  <h2>O nás</h2>
+  <h2>Dopad Ai na fungování obecních úřadů během příštích 2 let</h2>
   <p>Tento projekt přináší přehled o&nbsp;využívání AI na českých obcích.</p>
 </section>
+
 <section id="cooperation">
-  <h2>Spolupráce</h2>
+  <h2>Plán zavedení, pokud nevyužívají AI.</h2>
   <p>Máte-li zájem o&nbsp;spolupráci, kontaktujte nás.</p>
 </section>
+
 </main>
 <script src="script.js"></script>
 </body>
