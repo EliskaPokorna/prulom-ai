@@ -1,11 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Průlom AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root {
+  --c-bg: #ffffff;
+  --c-text: #1e2034;
+  --c-main: #414a9a;
+  --c-acc: #d74090;
+  --c-main-light: color-mix(in srgb, var(--c-main) 30%, white);
+  --c-acc-light: color-mix(in srgb, var(--c-acc) 30%, white);
+}
+* {box-sizing: border-box;}
+body {
+  margin:0;
+  font-family:'Figtree', sans-serif;
+  background:var(--c-bg);
+  color:var(--c-text);
+  scroll-behavior:smooth;
+}
+nav {
+  position:sticky;
+  top:0;
+  background:var(--c-bg);
+  display:flex;
+  justify-content:space-between;
+  padding:10px 20px;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+nav .brand {font-weight:700;}
+nav a {color:var(--c-text);text-decoration:none;margin-left:20px;}
+nav a:hover {text-decoration:underline;}
+section {padding:80px 20px;}
+h1,h2 {color:var(--c-text);}
+ul {list-style:disc;margin-left:20px;}
+.chart-container {opacity:0;transform:translateY(40px);transition:opacity .6s, transform .6s;max-width:600px;margin:auto;}
+.chart-container.visible {opacity:1;transform:none;}
+.flex {display:flex;flex-wrap:wrap;gap:20px;}
+.half {flex:1 1 300px;}
+canvas {max-width:100%;height:auto;}
+.small {font-size:.8rem;font-style:italic;margin-top:10px;}
+</style>
 </head>
 <body>
+<nav>
+  <div class="brand">PRŮLOM AI</div>
+  <div>
+    <a href="#main-results">hlavní výsledky</a>
+    <a href="#attitude">uvažování o AI</a>
+    <a href="#future">budoucnost</a>
+    <a href="#about">o nás</a>
+    <a href="#cooperation">spolupráce</a>
+  </div>
+</nav>
+<main>
+<section id="hero">
+  <h1>Obecní úřady chtějí AI, ale brzdí je:</h1>
+  <ul>
+    <li>legislativní nejistota</li>
+    <li>strach ze zcizení dat</li>
+    <li>nedostatek odborníků</li>
+  </ul>
+</section>
+<section id="main-results">
+  <h2>97&nbsp;%&nbsp;obcí do&nbsp;2500&nbsp;obyvatel nemá žádná zavedená pravidla k&nbsp;využívání&nbsp;AI.</h2>
+  <div class="chart-container"><canvas id="pie-rules"></canvas></div>
+</section>
+<section id="use">
+  <p>51&nbsp;%&nbsp;obcí do&nbsp;2&nbsp;500&nbsp;obyvatel používá AI nástroje – nejčastěji ke generování textů a&nbsp;nápadů, obrázků a&nbsp;ke komunikaci s&nbsp;občany.</p>
+  <h2>Použití AI nástrojů na úřadě</h2>
+  <div class="flex">
+    <div class="half chart-container"><canvas id="bar-areas"></canvas><div class="small">↑ Hlavní oblasti používání AI</div></div>
+    <div class="half chart-container"><canvas id="pie-use"></canvas></div>
+  </div>
+</section>
+<section id="attitude">
+  <h2>Informace o užívání AI na obcích</h2>
+  <p>Vnímání umělé inteligence na obcích je spíše pozitivní. Pouze&nbsp;6&nbsp;%&nbsp;obcí nevnímá příchod&nbsp;AI přínosným.</p>
+  <div class="chart-container"><canvas id="pie-attitude"></canvas></div>
+</section>
+<section id="barriers">
+  <h2>Překážky zavádění AI na obcích</h2>
+  <div class="chart-container"><canvas id="bar-barriers"></canvas></div>
+</section>
+<section id="future">
+  <h2>Budoucnost</h2>
+  <p>Budoucnost AI na obcích přinese nové příležitosti a&nbsp;výzvy.</p>
+</section>
+<section id="about">
+  <h2>O nás</h2>
+  <p>Tento projekt přináší přehled o&nbsp;využívání AI na českých obcích.</p>
+</section>
+<section id="cooperation">
+  <h2>Spolupráce</h2>
+  <p>Máte-li zájem o&nbsp;spolupráci, kontaktujte nás.</p>
+</section>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
+  const root = getComputedStyle(document.documentElement);
+  const cMain = root.getPropertyValue('--c-main').trim();
+  const cAcc = root.getPropertyValue('--c-acc').trim();
+  const cMainLight = root.getPropertyValue('--c-main-light').trim();
+  const cAccLight = root.getPropertyValue('--c-acc-light').trim();
 
+  function pieGradient(ctx, color, light){
+    const w = ctx.canvas.width, h = ctx.canvas.height;
+    const g = ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);
+    g.addColorStop(0,'#ffffff');
+    g.addColorStop(0.7, light);
+    g.addColorStop(1, color);
+    return g;
+  }
+  function barGradient(ctx, color, light){
+    const g = ctx.createLinearGradient(0,0,ctx.canvas.width,0);
+    g.addColorStop(0,color);
+    g.addColorStop(0.7, light);
+    g.addColorStop(1,'#ffffff');
+    return g;
+  }
+  const highlight={
+    id:'highlight',
+    afterEvent(chart,args){
+      const act = chart.getActiveElements();
+      chart.data.datasets.forEach(ds=>{if(!ds._bg) ds._bg = ds.backgroundColor.slice();});
+      chart.data.datasets.forEach(ds=>ds.backgroundColor = ds._bg.slice());
+      if(act.length){
+        const {datasetIndex:index, index:i} = act[0];
+        chart.data.datasets.forEach((ds,di)=>{
+          ds.backgroundColor = ds.backgroundColor.map((c,ci)=> di===index && ci===i ? ds._bg[ci] : 'lightgray');
+        });
+      }
+      chart.update('none');
+    }
+  };
+
+  const charts=[];
+  const ctx1=document.getElementById('pie-rules').getContext('2d');
+  charts.push(new Chart(ctx1,{type:'doughnut',data:{labels:['bez pravidel','má pravidla'],datasets:[{data:[97,3],backgroundColor:[pieGradient(ctx1,cAcc,cAccLight),pieGradient(ctx1,cMain,cMainLight)],hoverOffset:5}]},options:{plugins:{legend:{display:false}}},plugins:[highlight]}));
+
+  const ctx2=document.getElementById('pie-use').getContext('2d');
+  charts.push(new Chart(ctx2,{type:'doughnut',data:{labels:['Ano','Ne'],datasets:[{data:[51,49],backgroundColor:[pieGradient(ctx2,cAcc,cAccLight),pieGradient(ctx2,cMain,cMainLight)],hoverOffset:5}]},options:{plugins:{legend:{position:'bottom'}}},plugins:[highlight]}));
+
+  const ctx3=document.getElementById('bar-areas').getContext('2d');
+  charts.push(new Chart(ctx3,{type:'bar',data:{labels:['generování textů a nápadů','komunikace s občany (web, chatboty, app)','generování obrázků','práce s daty a tabulkami','automatizace agend a opakujících se úkonů','ostatní'],datasets:[{data:[55,19,13,5,3,5],backgroundColor:Array(6).fill(barGradient(ctx3,cAcc,cAccLight)),hoverOffset:5}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:60,ticks:{callback:v=>v+'%'}},y:{ticks:{font:{size:12}}}}},plugins:[highlight]}));
+
+  const ctx4=document.getElementById('pie-attitude').getContext('2d');
+  charts.push(new Chart(ctx4,{type:'doughnut',data:{labels:['pozitivní','neutrální','negativní'],datasets:[{data:[49,45,6],backgroundColor:[pieGradient(ctx4,cAcc,cAccLight),pieGradient(ctx4,cMainLight,'#ffffff'),pieGradient(ctx4,cMain,cMainLight)],hoverOffset:5,radius:'100%'},{data:[9,40,4,2],backgroundColor:[pieGradient(ctx4,cAcc,cAccLight),pieGradient(ctx4,cAccLight,'#ffffff'),pieGradient(ctx4,cMainLight,'#ffffff'),pieGradient(ctx4,cMain,cMainLight)],hoverOffset:5,radius:'70%'}]},options:{plugins:{legend:{position:'bottom'}}},plugins:[highlight]}));
+
+  const ctx5=document.getElementById('bar-barriers').getContext('2d');
+  charts.push(new Chart(ctx5,{type:'bar',data:{labels:['nízké povědomí o AI','právní/etická nejasnost','chybějící koncepce a vize','nedostatečně školený personál','nedostatek finančních prostředků','nevyhovující technická infrastruktura','odmítání AI ze strany pracovníků'],datasets:[{data:[33,15,15,15,13,5,4],backgroundColor:Array(7).fill(barGradient(ctx5,cMain,cMainLight)),hoverOffset:5}]},options:{plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:12}}},x:{max:35,ticks:{callback:v=>v+'%'}}}},plugins:[highlight]}));
+
+  window.addEventListener('resize',()=>charts.forEach(c=>c.update()));
+
+  const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}})},{threshold:0.2});
+  document.querySelectorAll('.chart-container').forEach(el=>obs.observe(el));
+});
+</script>
 </body>
 </html>
