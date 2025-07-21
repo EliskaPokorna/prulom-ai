@@ -15,27 +15,26 @@
   <div class="container">
     <div class="brand">PRŮLOM<span>AI</span><br><span class="brand__subtitle">využití AI v obcích ČR 2025</span></div>
     <div class="menu">
-      <a href="#main-results">hlavní výsledky</a>
-      <a href="#attitude">uvažování o AI</a>
-      <a href="#future">budoucnost</a>
-      <a href="#about">o nás</a>
-      <a href="#cooperation">spolupráce</a>
+      <a href="#main-results">Hlavní výsledky</a>
+      <a href="#attitude">Postoj k AI</a>
+      <a href="#future-ai">Budoucnost</a>
+      <a href="#about">O průzkumu</a>
+      <a href="#partners">Spolupráce</a>
     </div>
   </div>
 </nav>
 <main class="container">
 
-
 <section id="hero" class="hero">
   <div class="hero__container">
     <div class="hero-left">
-      <h1>Obecní úřady chtějí AI, ale brzdí je:</h1>
       <h2>Výsledky prvního celostátní průzkumu o použití AI na obcích v ČR,<br>kterého se zúčastnilo téměř 200 obcí do 2 500 obyvatel.<br></h2>
+      <h1>Obecní úřady chtějí AI, ale&nbsp;brzdí&nbsp;je&nbsp;hlavně:</h1>
     </div>
     <ul>
-      <li class="hero-1">legislativní nejistota</li>
-      <li class="hero-2">strach ze zcizení dat</li>
-      <li class="hero-3">nedostatek odborníků</li>
+      <li class="hero-1">bezpečnost a zcizení dat (39 %)</li>
+      <li class="hero-2">nedostatek odborníků (22 %)</li>
+      <li class="hero-3">legislativní nejistota (20 %)</li>
     </ul>
   </div>
 </section>
@@ -46,7 +45,10 @@
     <div class="chart-container"><canvas id="pie-rules"></canvas></div>
     <div class="chart-right">
       <div class="chart-bg">
-        <h2><span>97&nbsp;%&nbsp;</span><br>obcí do&nbsp;2500&nbsp;obyvatel nemá žádná zavedená pravidla k&nbsp;využívání&nbsp;AI.</h2>
+        <h2>
+          <span id="percent">0 %</span><br>
+          obcí do 2500 obyvatel nemá žádná zavedená pravidla k využívání AI.
+        </h2>
       </div>
       <div class="chart-bg__2">
         <h2>Pouze 3 % obcí mají obecné zásady bez detailní směrnice pro AI.</h2>
@@ -58,13 +60,8 @@
 <section id="use">
   <h1>51&nbsp;%&nbsp;obcí do&nbsp;2&nbsp;500&nbsp;obyvatel používá AI nástroje – nejčastěji ke generování textů a&nbsp;nápadů, obrázků a&nbsp;ke komunikaci s&nbsp;občany.</h1>
   <div class="use__container">
-    <div class="use__left">
-      <h2>Použití AI nástrojů na úřadě</h2>
-      <div class="half chart-container"><canvas id="bar-areas"></canvas></div>
-    </div>
-    <div class="use__right">
-      <div class="half chart-container"><canvas id="pie-use"></canvas></div>
-    </div>
+    <h2>Použití AI nástrojů na úřadě</h2>
+    <div class="half chart-container"><canvas id="bar-areas"></canvas></div>
   </div>
 </section>
 
@@ -81,23 +78,38 @@
   <div class="chart-container"><canvas id="bar-barriers"></canvas></div>
 </section>
 
-<section id="future">
-  <h2>Obavy lidí</h2>
-  <p>Budoucnost AI na obcích přinese nové příležitosti a&nbsp;výzvy.</p>
+<section id="employee-attitude" class="chart-center">
+  <h1>Obavy nebo odpor zaměstnanců vůči AI</h1>
+  <div class="chart-container">
+    <canvas id="bar-employee-attitude"></canvas>
+  </div>
+</section>
+
+<section id="future-ai">
+  <h1 class="future-title">Smýšlení o budoucnosti AI na obcích</h1>
+</section>
+
+<section id="future" class="chart-center">
+  <!-- GRAF 6 – Dopad AI na fungování obecních úřadů během příštích 2 let -->
+  <div id="impact-future" class="chart-center">
+    <h2>Dopad AI na fungování obecních úřadů během příštích 2 let</h2>
+    <div class="chart-container">
+      <canvas id="pie-impact-future"></canvas>
+    </div>
+  </div>
+
+  <!-- GRAF 7 – Plán zavedení, pokud nevyužívají AI -->
+  <div id="plan-implementation" class="chart-center">
+    <h2>Plán zavedení, pokud nevyužívají AI</h2>
+    <div class="chart-container">
+      <canvas id="pie-plan-implementation"></canvas>
+    </div>
+  </div>
 </section>
 
 <section id="about">
-  <h2>Dopad Ai na fungování obecních úřadů během příštích 2 let</h2>
-  <p>Tento projekt přináší přehled o&nbsp;využívání AI na českých obcích.</p>
-</section>
-
-<section id="cooperation">
-  <h2>Plán zavedení, pokud nevyužívají AI.</h2>
-  <p>Máte-li zájem o&nbsp;spolupráci, kontaktujte nás.</p>
-</section>
-
-<section id="about-card">
-  <h1>O nás</h1>
+  <h1>O průzkumu</h1>
+  <p class="card-title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, ex dolores est voluptates aspernatur nesciunt iste distinctio illo rem molestias tempore adipisci quas quo at officia quidem animi deleniti itaque?Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ea recusandae voluptate tenetur, praesentium libero, saepe iure doloribus amet nisi fugit porro error commodi repellendus quibusdam provident odit incidunt quaerat!</p>
   <div class="card-strip">
     <div class="card">
       <div class="card-content">
@@ -128,7 +140,7 @@
 </section>
 
 <section id="partners">
-  <h1>Partneři</h1>
+  <h1>Partneři průzkumu</h1>
   <div class="card-strip">
     <div class="card card2">
       <div class="card-content">
@@ -143,7 +155,7 @@
     <div class="card card2">
       <div class="card-content">
         <h2>Galileo Corporation s.r.o.</h2>
-        <p class="card-text">Galileo Corporation je lídrem na trhu webových stránek a digitálních úředních desek pro obce a města v České republice i na Slovensku. Již více než 23 let podporuje obce, školy a další veřejné instituce při zavádění moderních digitálních technologií. Součástí těchto řešení je i propojení umělé inteligence s webovými stránkami, které přináší nové možnosti pro efektivnější komunikaci s občany a správu informací pro vice než 2 500 samospráv.</p>
+        <p class="card-text">Galileo Corporation je lídrem na trhu webových stránek a digitálních úředních desek pro obce a města v České republice i na Slovensku. Již více než 23 let podporuje obce, školy a další veřejné instituce při zavádění moderních digitálních technologií. Součástí těchto řešení je i propojení umělé inteligence s webovými stránkami, které přináší nové možnosti pro efektivnější komunikaci s občany a správu informací pro vice než 2 500 obcí a měst.</p>
         <p class="card-link">
           <img src="images/foto-galileo.png" alt="Fotografie Galileo" />
           <a class="link-web" href="https://www.igalileo.cz/" target="_blank">Webové stránky</a>
