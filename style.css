@@ -84,13 +84,21 @@ nav a:hover {
 }
 
 section {
-  padding: 20px 15px;
+  padding: 0 15px;
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+
+  @media(min-width: 1200px) {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+  }
 }
 
 h1 {
   color: var(--c-text);
   font-size: 24px;
-  margin-top: 60px;
+  margin-top: 0;
+  text-align: center;
 
   @media(min-width: 768px) {
     font-size: 50px;
@@ -309,14 +317,11 @@ ul {
   }
 
   h1 {
-    text-align: center;
-    text-align: left;
     padding: 0 20px;
     margin-bottom: 40px;
 
     @media(min-width: 768px) {
       margin-bottom: 60px;
-      text-align: center;
     }
   }
 
@@ -430,7 +435,6 @@ ul {
   h1 {
     @media(min-width: 768px) {
       padding: 0 50px;
-      text-align: center;
     }
   }
 
@@ -499,10 +503,6 @@ ul {
 #attitude {
   background: rgba(var(--c-main2), 0.04);
 
-  h1 {
-    text-align: center;
-  }
-
   p {
     text-align: center;
 
@@ -522,9 +522,6 @@ ul {
 /* barriers */
 
 #barriers {
-  h1 {
-    text-align: center;
-  }
 
   .chart-container {
     height: 200px;
@@ -548,17 +545,12 @@ ul {
 
 
   h1 {
-    text-align: center;
     color: var(--c-bg);
   }
 }
 
 
-#partners {
-  h1 {
-    text-align: center;
-  }
-}
+#partners {}
 
 .card-strip {
   display: flex;
@@ -755,7 +747,6 @@ ul {
   padding-bottom: 0;
 
   h1 {
-    text-align: center;
     color: var(--c-bg);
   }
 }
