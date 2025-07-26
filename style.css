@@ -32,26 +32,32 @@ body {
 }
 
 /* MENU */
-
 nav {
   position: sticky;
   top: 0;
-  display: none;
   background: var(--c-bg);
   color: #fff;
   padding: 0 20px;
   z-index: 1000;
   border-bottom: 3px solid var(--c-acc);
-
-  @media(min-width: 768px) {
-    display: block;
-  }
 }
 
 nav .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    justify-content: center;
+    padding-top: 20px;
+  }
+
+  @media (min-width: 992px) {
+    justify-content: space-between;
+    padding-top: 0;
+    padding: 0 40px;
+  }
 }
 
 nav .brand {
@@ -59,6 +65,12 @@ nav .brand {
   color: var(--c-main);
   font-size: 40px;
   line-height: 0.6;
+  padding: 20px 0;
+  text-decoration: none;
+
+  @media (min-width: 992px) {
+    padding: 0;
+  }
 }
 
 .brand__subtitle {
@@ -74,20 +86,69 @@ nav .brand span {
 }
 
 nav .menu {
-  padding: 40px 10px;
+  display: none;
+  flex-direction: column;
+  width: 100%;
 }
 
-nav a {
+nav .menu a {
   color: var(--c-text);
   text-decoration: none;
-  padding: 40px 30px;
-  font-size: 20px;
+  padding: 20px;
+  font-size: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (min-width: 992px) {
+    padding: 0 20px;
+  }
 }
 
-nav a:hover {
+nav .menu a:hover {
   color: var(--c-bg);
   background: var(--c-acc);
 }
+
+.hamburger {
+  font-size: 42px;
+  cursor: pointer;
+  display: block;
+  color: var(--c-acc);
+}
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+
+  nav .menu {
+    display: flex !important;
+    flex-direction: row;
+    width: auto;
+  }
+
+  nav .menu a {
+    padding: 40px 30px;
+    border: none;
+    font-size: 20px;
+
+    @media (min-width: 768px) {
+      padding: 40px 15px;
+    }
+
+    @media (min-width: 1200px) {
+      padding: 40px 30px;
+    }
+
+    @media (min-width: 1400px) {
+      padding: 40px;
+    }
+
+    @media (min-width: 1600px) {
+      padding: 40px 60px;
+    }
+  }
+}
+
 
 section {
   padding: 0 15px;
@@ -441,6 +502,9 @@ ul {
   .chart-container {
     display: flex;
     justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
 
     @media(min-width: 992px) {
       max-width: 500px;
@@ -451,6 +515,12 @@ ul {
       max-width: 600px;
       flex: 1 1 600px;
     }
+  }
+
+
+  .chart-container.visible {
+    opacity: 1;
+    visibility: visible;
   }
 
   .chart-right {
@@ -584,6 +654,9 @@ ul {
 
 /* attitude */
 
+
+#detailed-attitude {}
+
 #attitude {
   background: rgba(var(--c-main2), 0.04);
 
@@ -599,6 +672,33 @@ ul {
     width: 100%;
     max-width: 1400px;
     height: 300px;
+    position: relative;
+    color: var(--c-text);
+
+    .attitude-line {
+      position: absolute;
+      left: 16px;
+      top: 0;
+      width: calc(100% - 40px);
+      height: 20px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(215, 64, 144, 1) 6%, rgba(65, 74, 154, 0.5) 6%, rgba(65, 74, 154, 0.5) 51%, rgba(65, 74, 154, 1) 51%);
+    }
+
+    .attitude-left {
+      position: absolute;
+      left: 0;
+      display: none;
+      top: 0;
+    }
+
+    .attitude-middle {
+      display: none;
+    }
+
+    .attitude-right {
+      display: none;
+    }
   }
 }
 

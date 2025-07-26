@@ -13,8 +13,12 @@
 <body>
 <nav>
   <div class="container">
-    <div class="brand">PRŮLOM<span>AI</span><br><span class="brand__subtitle">využití AI v obcích ČR 2025</span></div>
-    <div class="menu">
+    <a href="#" class="brand">
+      PRŮLOM<span>AI</span><br>
+      <span class="brand__subtitle">využití AI v obcích ČR 2025</span>
+    </a>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <div class="menu" id="nav-menu">
       <a href="#main-results">Hlavní výsledky</a>
       <a href="#attitude">Postoj k AI</a>
       <a href="#future-ai">Budoucnost</a>
@@ -82,6 +86,10 @@
   <p>Vnímání umělé inteligence na obcích je spíše pozitivní. Pouze&nbsp;6&nbsp;%&nbsp;obcí nevnímá příchod&nbsp;AI přínosným.</p>
   <div class="chart-container">
     <canvas id="detailed-attitude"></canvas>
+    <div class="attitude-line"></div>
+    <div class="attitude-left">negativní</div>
+    <div class="attitude-middle">neutrální</div>
+    <div class="attitude-right">pozitivní</div>
   </div>
 </section>
 

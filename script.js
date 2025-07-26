@@ -175,7 +175,10 @@ const chart1 = new Chart(ctx1, {
   }
 });
 charts.push(chart1);
-observeAnimation(document.getElementById('pie-rules').parentElement, chart1);
+const pieRulesEl = document.getElementById('pie-rules').parentElement;
+pieRulesEl.classList.remove('visible'); // preventivně
+observeAnimation(pieRulesEl, chart1);
+
 
 
 /* GRAF 2 */
@@ -708,23 +711,56 @@ observeAnimation(document.getElementById('pie-plan-implementation').parentElemen
 
 /* ANIMACE % */
 document.addEventListener('DOMContentLoaded', () => {
-      const el = document.getElementById('percent');
-      const start = 0;
-      const end = 97;
-      const duration = 1500;
-      const frameRate = 60;
-      const totalFrames = Math.round(frameRate * (duration / 1000));
-      const increment = (end - start) / totalFrames;
-      let current = start;
-      let frame = 0;
+  const el = document.getElementById('percent');
+  let hasAnimated = false;  // aby se animace spustila jen jednou
 
-      const counter = setInterval(() => {
-        frame++;
-        current += increment;
-        if (frame >= totalFrames) {
-          current = end;
-          clearInterval(counter);
-        }
-        el.textContent = Math.floor(current) + ' %';
-      }, duration / totalFrames);
+  // funkce pro animaci čísla
+  function animatePercent() {
+    const start = 0;
+    const end = 97;
+    const duration = 1500;
+    const frameRate = 60;
+    const totalFrames = Math.round(frameRate * (duration / 1000));
+    const increment = (end - start) / totalFrames;
+    let current = start;
+    let frame = 0;
+
+    const counter = setInterval(() => {
+      frame++;
+      current += increment;
+      if (frame >= totalFrames) {
+        current = end;
+        clearInterval(counter);
+      }
+      el.textContent = Math.floor(current) + ' %';
+    }, duration / totalFrames);
+  }
+
+  // IntersectionObserver pro #percent
+  const percentObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        animatePercent();
+        hasAnimated = true;
+        observer.unobserve(entry.target);
+      }
     });
+  }, { threshold: 1.0 });  // nebo threshold: 0.5 podle potřeby
+
+  percentObserver.observe(el);
+});
+
+
+
+
+
+/* MENU */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("nav-menu");
+
+  hamburger.addEventListener("click", function () {
+    navMenu.style.display = navMenu.style.display === "flex" ? "none" : "flex";
+  });
+});
