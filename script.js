@@ -36,7 +36,7 @@ function toRgba(color, alpha) {
 }
 
 // nový plugin, rychlejší a s draw(), ne update()
-const fadeOthersFast = {
+/*const fadeOthersFast = {
   id: 'fadeOthersFast',
   beforeEvent(chart, args) {
     const e = args.event;
@@ -67,28 +67,52 @@ const fadeOthersFast = {
     // redraw bez resetu tooltipu
     chart.draw();
   }
-};
+};*/
+
+
+
+
 
  // GENERIC ANIMATION FUNCTION -----------------------------------------
-  function animateChart(chart) {
-    // collect all items
-    const items = [];
-    chart.data.datasets.forEach((ds, di) => {
-      ds.data.forEach((v, idx) => items.push({ di, idx, value: v }));
-    });
-    // init to zero
-    chart.data.datasets.forEach(ds => { ds.data = ds.data.map(() => 0); });
-    chart.update();
-    // sort descending
-    items.sort((a, b) => b.value - a.value);
-    // sequentially animate
-    items.forEach((item, k) => {
-      setTimeout(() => {
-        chart.data.datasets[item.di].data[item.idx] = item.value;
-        chart.update();
-      }, k * 400);
-    });
-  }
+function animateChart(chart) {
+  // 1) Uložíme si originály
+  const items = [];
+  chart.data.datasets.forEach((ds, di) => {
+    ds._orig = ds.data.slice();
+    ds.data.forEach((v, idx) => items.push({ di, idx, value: v }));
+  });
+
+  // 2) Všechna data na nulu
+  chart.data.datasets.forEach(ds => {
+    ds.data = ds.data.map(() => 0);
+  });
+
+  // 3) Vykreslíme hned na 0 bez animace
+  chart.options.animation = { duration: 0 };
+  chart.update();
+
+  // 4) Seřadíme položky sestupně
+  items.sort((a, b) => b.value - a.value);
+
+  // 5) Postupně je doplníme zpátky
+  items.forEach((item, k) => {
+    setTimeout(() => {
+      // a) nastavíme tu jedinou hodnotu
+      chart.data.datasets[item.di].data[item.idx] = item.value;
+
+      // b) zapneme plynulou animaci pro právě tu změnu
+      chart.options.animation = {
+        duration: 400,
+        easing: 'easeOutCubic'
+      };
+
+      // c) aktualizujeme graf (teď už to hezky přejede z 0 → target během 400 ms)
+      chart.update();
+    }, k * 400);
+  });
+}
+
+
 
   const charts = [];
   const observers = [];
@@ -134,22 +158,27 @@ const dataLabelPlugin = {
   }
 };
 
+const commonOptions = {
+  animation: { duration: 0 }   // žádná defaultní animace
+  // …můžeš sem dát i další shared options…
+};
 
 /* GRAF 1 */
-
 const ctx1 = document.getElementById('pie-rules').getContext('2d');
+
 const chart1 = new Chart(ctx1, {
   type: 'doughnut',
   data: {
-    labels: ['bez pravidel', 'má pravidla'],
+    labels: ['bez pravidel', 'obecná pravidla'],
     datasets: [{
       data: [97, 3],
       backgroundColor: palette(2),
       hoverOffset: 5
     }]
   },
-  plugins: [fadeOthersFast, dataLabelPlugin],
+  plugins: [dataLabelPlugin],
   options: {
+    ...commonOptions,
     plugins: {
       legend: {
         position: 'bottom',
@@ -268,11 +297,12 @@ const chart2 = new Chart(ctx2, {
       backgroundColor: areaColors
     }]
   },
-  plugins: [areaValueLabels, fadeOthersFast],
+  plugins: [areaValueLabels],
   options: {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
+    ...commonOptions,
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -362,6 +392,7 @@ observeAnimation(document.getElementById('bar-areas').parentElement, chart2);
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
+    ...commonOptions,
 
     plugins: {
       legend: {
@@ -476,11 +507,12 @@ const chart4 = new Chart(ctx4, {
       backgroundColor: barrierColors
     }]
   },
-  plugins: [barrierValueLabels, fadeOthersFast],
+  plugins: [barrierValueLabels],
   options: {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
+    ...commonOptions,
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -537,7 +569,7 @@ const employeeLabels = [
 const employeeData = [54, 35, 7, 4];
 
 // Use the same palette function as in Graf 1 for consistent colouring
-const employeeColors = palette(employeeLabels.length);
+const employeeColors = barrierColors.slice(0, employeeLabels.length);
 
 const chart5 = new Chart(ctx5, {
   type: 'bar',
@@ -548,11 +580,12 @@ const chart5 = new Chart(ctx5, {
       backgroundColor: employeeColors
     }]
   },
-  plugins: [barrierValueLabels, fadeOthersFast],
+  plugins: [barrierValueLabels],
   options: {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
+    ...commonOptions,
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -611,8 +644,9 @@ const chart6 = new Chart(ctx6, {
       hoverOffset: 5
     }]
   },
-  plugins: [fadeOthersFast, dataLabelPlugin],
+  plugins: [dataLabelPlugin],
   options: {
+    ...commonOptions,
     plugins: {
       legend: {
         position: 'bottom',
@@ -656,8 +690,9 @@ const chart7 = new Chart(ctx7, {
       hoverOffset: 5
     }]
   },
-  plugins: [fadeOthersFast, dataLabelPlugin],
+  plugins: [dataLabelPlugin],
   options: {
+    ...commonOptions,
     plugins: {
       legend: {
         position: 'bottom',
@@ -748,6 +783,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 1.0 });  // nebo threshold: 0.5 podle potřeby
 
   percentObserver.observe(el);
+
+
+  const visObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      visObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 1.0 });
+
+document.querySelectorAll('.chart-container').forEach(el => {
+  visObserver.observe(el);
+});
 });
 
 
@@ -762,5 +811,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   hamburger.addEventListener("click", function () {
     navMenu.style.display = navMenu.style.display === "flex" ? "none" : "flex";
+  });
+});
+
+
+
+/* Šipka nahoru */
+
+const scrollBtn = document.getElementById('scrollTopBtn');
+
+// Když uživatel scrolluje, kontrolujeme polohu
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {  // po kolika pixelech se objeví
+    scrollBtn.classList.add('show');
+  } else {
+    scrollBtn.classList.remove('show');
+  }
+});
+
+// Po kliknutí hladce scrolluje nahoru
+scrollBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
   });
 });
