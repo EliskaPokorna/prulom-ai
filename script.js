@@ -35,43 +35,6 @@ function toRgba(color, alpha) {
   return color;
 }
 
-// nový plugin, rychlejší a s draw(), ne update()
-/*const fadeOthersFast = {
-  id: 'fadeOthersFast',
-  beforeEvent(chart, args) {
-    const e = args.event;
-    if (e.type !== 'mousemove' && e.type !== 'mouseout') return;
-
-    // ulož původní barvy jednou
-    chart.data.datasets.forEach(ds => {
-      if (!ds._orig) ds._orig = ds.backgroundColor.slice();
-    });
-
-    const active = chart.getActiveElements();
-    if (active.length) {
-      const { datasetIndex: di, index: i } = active[0];
-      chart.data.datasets.forEach((ds, idx) => {
-        ds.backgroundColor = ds._orig.map((c, ci) =>
-          (idx === di && ci === i)
-            ? ds._orig[ci]
-            : toRgba(ds._orig[ci], 0.2)
-        );
-      });
-    } else {
-      // žádný hover → vrať všechny barvy
-      chart.data.datasets.forEach(ds => {
-        ds.backgroundColor = ds._orig.slice();
-      });
-    }
-
-    // redraw bez resetu tooltipu
-    chart.draw();
-  }
-};*/
-
-
-
-
 
  // GENERIC ANIMATION FUNCTION -----------------------------------------
 function animateChart(chart) {
