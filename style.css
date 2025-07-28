@@ -63,13 +63,18 @@ nav .container {
 nav .brand {
   font-weight: 700;
   color: var(--c-main);
-  font-size: 40px;
-  line-height: 0.6;
+  font-size: 30px;
+  line-height: 0.7;
   padding: 20px 0;
   text-decoration: none;
   opacity: 0;
   transform: translateY(100px);
   animation: slideUp 0.8s ease-out forwards;
+
+  @media (min-width: 768px) {
+    font-size: 40px;
+    line-height: 0.6;
+  }
 
   @media (min-width: 992px) {
     padding: 0;
@@ -128,6 +133,7 @@ nav .menu a:hover {
   cursor: pointer;
   display: block;
   color: var(--c-acc);
+  transition: all 0.3s ease;
 }
 
 @media (min-width: 768px) {
@@ -401,12 +407,10 @@ ul {
   }
 
   .outset-right {
-    @media(min-width: 768px) {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 
     @media(min-width: 992px) {
       max-width: 50%;
@@ -424,19 +428,23 @@ ul {
     }
 
     .outset-img {
-      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
 
       @media(min-width: 768px) {
-        width: auto;
         margin-right: 20px;
       }
 
       img {
         object-fit: contain;
-        max-width: 200px;
+        width: 145px;
+        height: auto;
+
+        @media(min-width: 450px) {
+          width: auto;
+          max-width: 200px;
+        }
       }
     }
 
@@ -534,7 +542,7 @@ ul {
 }
 
 .hero ul {
-  padding: 0;
+  padding: 0 0 0 10px;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
@@ -559,8 +567,9 @@ ul {
   padding: 0;
   border-radius: 5px;
   color: var(--c-main);
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 20px;
+  list-style: none;
 
   @media(min-width: 768px) {
     font-size: 26px;
@@ -569,9 +578,25 @@ ul {
   @media(min-width: 1200px) {
     font-size: 32px;
   }
+}
 
-  &::marker {
-    content: url(images/chevron-right.svg);
+.hero li::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-image: url(images/chevron-right.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  @media(min-width: 768px) {
+    top: 7px;
+  }
+
+  @media(min-width: 1200px) {
+    top: 10px;
   }
 }
 
@@ -1242,14 +1267,10 @@ ul {
     }
   }
 
-
-
-
   .about__middle {
     margin-top: 20px;
 
     ul {
-
       li {
         color: var(--c-bg);
         margin-bottom: 10px;
@@ -1264,11 +1285,29 @@ ul {
 
     img {
       width: 180px;
-
-      @media(min-width: 768px) {}
     }
   }
 
+  ul {
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 1px;
+      width: 20px;
+      height: 20px;
+      background-image: url(images/chevron-right.svg);
+      background-repeat: no-repeat;
+      filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(190deg) brightness(105%) contrast(102%);
+      background-size: contain;
+    }
+  }
 
   .link-linkedin {
     display: flex;

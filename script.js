@@ -773,9 +773,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const navMenu = document.getElementById("nav-menu");
 
   hamburger.addEventListener("click", function () {
-    navMenu.style.display = navMenu.style.display === "flex" ? "none" : "flex";
+    const isOpen = navMenu.style.display === "flex";
+
+    // Přepnutí zobrazení menu
+    navMenu.style.display = isOpen ? "none" : "flex";
+
+    // Změna textového obsahu (☰ ↔ ✖)
+    hamburger.innerHTML = isOpen ? "&#9776;" : "&times;";
   });
 });
+
 
 
 
