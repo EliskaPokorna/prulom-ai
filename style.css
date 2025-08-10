@@ -180,7 +180,7 @@ section {
     padding-top: 80px !important;
     padding-bottom: 80px !important;
     padding-left: 40px !important;
-    padding-right: 40px !important;
+    padding-right: 40px;
   }
 }
 
@@ -665,33 +665,47 @@ ul {
 
     @media(min-width: 1600px) {
       gap: 50px;
+      padding-left: 60px;
     }
   }
 
-  .chart-container {
+  .chart-container__video {
     display: flex;
     justify-content: center;
 
     @media(min-width: 992px) {
-      max-width: 500px;
-      flex: 1 1 500px;
+      max-width: 440px;
+      flex: 1 1 440px;
     }
 
     @media(min-width: 1600px) {
-      max-width: 600px;
-      flex: 1 1 600px;
+      max-width: 440px;
+      flex: 1 1 440px;
+    }
+  }
+
+  .chart-container__video video {
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 40px;
+    object-fit: contain;
+    padding-bottom: 20px;
+
+    @media(min-width: 992px) {
+      padding-bottom: 0;
     }
   }
 
   .chart-right {
     @media(min-width: 992px) {
-      max-width: calc(100% - 520px);
-      flex: calc(100% - 520px);
+      max-width: calc(100% - 460px);
+      flex: calc(100% - 460px);
     }
 
     @media(min-width: 1600px) {
-      max-width: calc(100% - 650px);
-      flex: 1 1 calc(100% - 650px);
+      max-width: calc(100% - 490px);
+      flex: 1 1 calc(100% - 490px);
     }
   }
 
@@ -706,6 +720,7 @@ ul {
     @media(min-width: 768px) {
       padding: 20px 20px 20px 60px;
       height: 550px;
+      justify-content: flex-start;
     }
 
     @media(min-width: 992px) {
@@ -729,6 +744,7 @@ ul {
       padding: 20px 20px 20px 60px;
       height: 120px;
       border-radius: 0 0 0 40px;
+      justify-content: flex-start;
     }
 
     @media(min-width: 992px) {
@@ -736,8 +752,8 @@ ul {
     }
 
     @media(min-width: 1200px) {
-      padding: 20px 20px 20px padding: 20px 20px 20px 100px;
-      ;
+      padding: 20px 20px 20px 100px;
+
     }
   }
 
@@ -912,6 +928,61 @@ ul {
 
     @media(min-width: 768px) {
       height: 400px;
+    }
+  }
+
+  .barriers-container {
+    max-width: 1700px;
+    margin: 0 auto;
+
+    @media(min-width: 992px) {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    @media(min-width: 1600px) {
+      gap: 50px;
+    }
+  }
+
+  .chart-container {
+    @media(min-width: 992px) {
+      max-width: calc(100% - 400px);
+      flex: calc(100% - 400px);
+    }
+
+    @media(min-width: 1600px) {
+      max-width: calc(100% - 420px);
+      flex: 1 1 calc(100% - 420px);
+    }
+  }
+
+  .chart-container__video {
+    display: flex;
+    justify-content: center;
+
+    @media(min-width: 992px) {
+      max-width: 380px;
+      flex: 1 1 380px;
+    }
+
+    @media(min-width: 1600px) {
+      max-width: 380px;
+      flex: 1 1 380px;
+    }
+  }
+
+  .chart-container__video video {
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 40px;
+    object-fit: contain;
+    padding-bottom: 20px;
+
+    @media(min-width: 992px) {
+      padding-bottom: 0;
     }
   }
 }

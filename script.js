@@ -126,50 +126,6 @@ const commonOptions = {
   // …můžeš sem dát i další shared options…
 };
 
-/* GRAF 1 */
-const ctx1 = document.getElementById('pie-rules').getContext('2d');
-
-const chart1 = new Chart(ctx1, {
-  type: 'doughnut',
-  data: {
-    labels: ['bez pravidel', 'obecná pravidla'],
-    datasets: [{
-      data: [97, 3],
-      backgroundColor: palette(2),
-      hoverOffset: 5
-    }]
-  },
-  plugins: [dataLabelPlugin],
-  options: {
-    ...commonOptions,
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: { font: { size: 20 } }
-      },
-      tooltip: {
-        enabled: true,
-        mode: 'nearest',
-        intersect: true,
-        callbacks: {
-          label: ctx => `${ctx.parsed}%`
-        }
-      }
-    },
-    hover: {
-      mode: 'nearest',
-      intersect: true
-    },
-    interaction: {
-      mode: 'nearest',
-      intersect: true
-    }
-  }
-});
-charts.push(chart1);
-const pieRulesEl = document.getElementById('pie-rules').parentElement;
-pieRulesEl.classList.remove('visible'); // preventivně
-observeAnimation(pieRulesEl, chart1);
 
 
 
